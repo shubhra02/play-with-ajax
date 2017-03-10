@@ -1,0 +1,98 @@
+@(displayBar: String)(implicit flash : Flash)
+@main(displayBar) {
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">MyApplication</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <form role="form" method="POST" action="@routes.SignupController.signupPost()">
+
+                <legend class="text-center">Register</legend>
+
+                <fieldset>
+                    <legend>Account Details</legend>
+
+                    <div class="form-group col-md-6">
+                        <label for="firstName">First name</label>
+                        <input type="text" class="form-control" name="firstName" id="firstName" placeholder="First Name" required>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="lastName">Last name</label>
+                        <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Last Name" required>
+                    </div>
+
+                    <div class="form-group col-md-12">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
+                    </div>
+            <br/><span style="color:red;font-size:15px;font-weight:bold;">@flash.get("emailexists").getOrElse("")</span><br/>
+
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="rePassword">Confirm Password</label>
+                        <input type="password" class="form-control" name="rePassword" id="rePassword" placeholder="Re-enter Password" required>
+                    </div>
+            <br/><span style="color:red;font-size:15px;font-weight:bold;">@flash.get("matcherror").getOrElse("")</span><br/>
+                    <div class="form-group col-md-6">
+                        <label for="company">Company</label>
+                        <input type="text" class="form-control" name="company" id="company" placeholder="Company Name">
+                    </div>
+                    <br>
+                    <div class="form-group col-md-6">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone Number">
+                    </div>
+
+                    <div class="uploadBtn">
+                        Upload your photo
+                        <input type="file"/>
+                    </div>
+
+
+                </fieldset>
+
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="" id="">
+                                I accept the <a href="#">terms and conditions</a>.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                    <br/><span style="color:red;font-size:15px;font-weight:bold;">@flash.get("message").getOrElse("")</span><br/>
+                        <button type="submit" class="btn btn-primary">
+                            Register
+                        </button>
+                        <a href="@routes.HomeController.index">Already have an account?</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+}

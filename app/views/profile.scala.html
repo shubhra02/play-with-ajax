@@ -1,0 +1,66 @@
+@(indexProfile: String)(person: List[PersonSignup])(implicit flash: Flash)
+@main(indexProfile){
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">MyApplication</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="@routes.HomeController.logout()"><i class="fa fa-power-off" aria-hidden="true"></i><span style="margin-left:10px;font-size:15px;">Logout</span></a></li>
+        </ul>
+    </div>
+</nav>
+<div class="row">
+    <div class="col-md-4" >
+
+        <div class="col-md-8 says" > @flash.get("message").getOrElse("Welcome!")</div>
+        <div class="col-md-4" ></div>
+
+    </div>
+    <div class="col-md-4" >
+
+        <img src="@routes.Assets.versioned("img1.jpg")" class="img-responsive profiledp img-circle" alt="playAvatar" >
+    </div>
+</div>
+
+<div class="container">
+    <label>Name</label>
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-3" ></div>
+
+        <div class="col-md-6 info underline" >@person(0).firstName @person(0).lastName  </div>
+        <div class="col-md-3" ></div>
+    </div>
+    <label>Email Id</label>
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-4" ></div>
+
+        <div class="col-md-4 restInfo" >@person(0).email</div>
+        <div class="col-md-4" ></div>
+    </div>
+    <label>Company</label>
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-4" ></div>
+
+        <div class="col-md-4 restInfo" >@person(0).company</div>
+    </div>
+    <label>Phone Number</label>
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-4" ></div>
+
+        <div class="col-md-4 restInfo" >@person(0).phone</div>
+    </div>
+    @if(person(0).isAdmin){
+
+    <div class="col-md-12 footer bot" >
+
+        <a href="@routes.AdminController.showManagement()"><i class="fa fa-cog" aria-hidden="true"></i><span style="margin-left:10px;font-size:16px;color: #a8a8a8;text-decoration:none;">Manage Accounts</span></a>
+
+    </div>
+
+    }
+</div>
+}
